@@ -18,4 +18,11 @@ class DashboardController extends Controller
                 return view('admin/admin_dashboard');
         }
     }
+
+    function logout(){
+        if(session()->has('User')){
+          session()->pull('User');
+          return redirect('/auth/login');
+        }
+      }
 }

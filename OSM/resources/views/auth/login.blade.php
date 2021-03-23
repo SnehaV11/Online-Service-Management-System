@@ -1,56 +1,69 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
+@extends('layouts.master-mini')
+@section('content')
+<div class="content-wrapper d-flex align-items-center justify-content-center auth theme-one" style="background-image: url({{ url('assets/images/auth/login_1.jpg') }}); background-size: cover;">
+  <div class="row w-100">
+    <div class="col-lg-4 mx-auto">
+      <div class="auto-form-wrapper">
         <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+          @csrf
+          <div class="form-group">
+            <label class="label" >email</label>
+            <div class="input-group">
+              <input type="text" id="email" class="form-control" placeholder="email" type="email" name="email" >
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="mdi mdi-check-circle-outline"></i>
+                </span>
+              </div>
             </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
+          </div>
+          <div class="form-group">
+            <label class="label">Password</label>
+            <div class="input-group">
+              <input  id="password" type="password" class="form-control" name="password" placeholder="*********">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="mdi mdi-check-circle-outline"></i>
+                </span>
+              </div>
             </div>
-
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary submit-btn btn-block">Login</button>
+          </div>
+          <div class="form-group d-flex justify-content-between">
+            <div class="form-check form-check-flat mt-0">
+              <label class="form-check-label">
+                <input id="remember_me" type="checkbox" class="form-check-input" checked> Keep me signed in </label>
             </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
+            @if (Route::has('password.request'))
+            <a href="{{ route('password.request') }}" class="text-small forgot-password text-black">Forgot Password</a>
+             @endif
+          </div>
+          <div class="form-group">
+            <button class="btn btn-block g-login">
+              <img class="mr-3" src="{{ url('assets/images/file-icons/icon-google.svg') }}" alt="">Log in with Google</button>
+          </div>
+          <div class="text-block text-center my-3">
+            <span class="text-small font-weight-semibold">Not a member ?</span>
+            <a href="{{ route('register') }}" class="text-black text-small">Create new account</a>
+          </div>
         </form>
-    </x-auth-card>
-</x-guest-layout>
+      </div>
+      <ul class="auth-footer">
+        <li>
+          <a href="#">Conditions</a>
+        </li>
+        <li>
+          <a href="#">Help</a>
+        </li>
+        <li>
+          <a href="#">Terms</a>
+        </li>
+      </ul>
+      <p class="footer-text text-center">copyright © 2018 Bootstrapdash. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+@endsection
+
