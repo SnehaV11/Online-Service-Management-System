@@ -4,12 +4,17 @@
   <div class="row w-100">
     <div class="col-lg-4 mx-auto">
       <div class="auto-form-wrapper">
+      <!-- Session Status -->
+      <x-auth-session-status class="mb-4" :status="session('status')" />
+
+      <!-- Validation Errors -->
+      <x-auth-validation-errors class="mb-4" :errors="$errors" />
         <form method="POST" action="{{ route('login') }}">
           @csrf
           <div class="form-group">
             <label class="label" >email</label>
             <div class="input-group">
-              <input type="text" id="email" class="form-control" placeholder="email" type="email" name="email" >
+              <input type="text" id="email" class="form-control"  type="email" name="email" >
               <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="mdi mdi-check-circle-outline"></i>
@@ -20,7 +25,7 @@
           <div class="form-group">
             <label class="label">Password</label>
             <div class="input-group">
-              <input  id="password" type="password" class="form-control" name="password" placeholder="*********">
+              <input  id="password" type="password" class="form-control" name="password" >
               <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="mdi mdi-check-circle-outline"></i>
