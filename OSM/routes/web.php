@@ -138,6 +138,8 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 });
 
+
+
 Route::get('/auth/logout',[DashboardController::class,'logout'])->name('auth.logout');
 
 require __DIR__.'/auth.php';

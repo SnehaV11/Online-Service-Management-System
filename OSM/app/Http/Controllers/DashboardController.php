@@ -9,13 +9,11 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function index(){
-        if(Auth::user()->hasRole('technician')){
-                return view('/technician/technician_dashboard');
+        if(Auth::user()->hasRole('admin')){
+                return view('/admin/admin_dashboard');
 
         }elseif(Auth::user()->hasRole('requester')) {
                  return view('/requester/requester_dashboard');
-        }elseif (Auth::user()->hasRole('admin')) {
-                return view('admin/admin_dashboard');
         }
     }
 

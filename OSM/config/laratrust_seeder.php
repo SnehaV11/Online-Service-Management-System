@@ -20,11 +20,8 @@ return [
         'requester' => [
             'users' => 'c,r,u,d',
             'profile' => 'r,u'
-        ],
-        'technician' => [
-            'users' => 'c,r,u,d',
-            'profile' => 'r,u'
         ]
+
     ],
 
     'permissions_map' => [

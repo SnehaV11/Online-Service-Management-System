@@ -6,6 +6,7 @@
     <div class="col-lg-4 mx-auto">
       <h2 class="text-center mb-4">Register</h2>
       <div class="auto-form-wrapper">
+      <x-auth-validation-errors class="mb-4" :errors="$errors" />
         <form method="POST" action="{{ route('register') }}">
           @csrf
           <div class="form-group">
@@ -41,20 +42,6 @@
           <div class="form-group">
             <div class="input-group">
               <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="Confirm Password">
-              <div class="input-group-append">
-                <span class="input-group-text">
-                  <i class="mdi mdi-check-circle-outline"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group">
-              <select id="role_id" class="form-control"
-                                name="role_id" required >
-                                <option value="requester">Requester</option>
-                                <option value="technician">Technician</option>
-                </select>
               <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="mdi mdi-check-circle-outline"></i>
