@@ -1,96 +1,70 @@
-<nav class="sidebar sidebar-offcanvas dynamic-active-class-disabled" id="sidebar">
-  <ul class="nav">
-    <li class="nav-item nav-profile not-navigation-link">
-      <div class="nav-link">
-        <div class="user-wrapper">
-          <div class="profile-image">
-            <img src="{{ url('assets/images/faces/face8.jpg') }}" alt="profile image">
-          </div>
-          <div class="text-wrapper">
-            <p class="profile-name">{{ Auth::user()->name }}</p>
-            <div class="dropdown" data-display="static">
-              <a href="#" class="nav-link d-flex user-switch-dropdown-toggler" id="UsersettingsDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <small class="designation text-muted">Admin</small>
-                <span class="status-indicator online"></span>
-              </a>
-            </div>
-          </div>
-        </div>
+<div class="vertical-nav bg-white" id="sidebar">
+  <div class="py-4 px-3 mb-4 bg-light">
+    <div class="media d-flex align-items-center">
+     <div class="media-body">
+        <h4 class="m-0">{{ Auth::user()->name }}</h4>
+        <p class="font-weight-normal text-muted mb-0">Admin</p>
       </div>
-    </li>
-    <li class="nav-item ">
-      <a class="nav-link" href="{{ url('/') }}">
-        <i class="menu-icon mdi mdi-television"></i>
-        <span class="menu-title">Dashboard</span>
-      </a>
-    </li>
-    <li class="nav-item ">
-      <a class="nav-link" href="{{ url('/charts/chartjs') }}">
-        <i class="menu-icon mdi mdi-chart-line"></i>
-        <span class="menu-title">Work Order</span>
-      </a>
-    </li>
-    <li class="nav-item ">
-      <a class="nav-link" data-toggle="collapse" href="#basic-ui"  aria-controls="basic-ui">
-        <i class="menu-icon mdi mdi-dna"></i>
-        <span class="menu-title">Requests</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse " id="basic-ui">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url('/basic-ui/buttons') }}">Buttons</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url('/basic-ui/dropdowns') }}">Dropdowns</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url('/basic-ui/typography') }}">Typography</a>
-          </li>
-        </ul>
-      </div>
-    </li>
+    </div>
+  </div>
 
-    <li class="nav-item ">
-      <a class="nav-link" href="{{ url('/charts/chartjs') }}">
-        <i class="menu-icon mdi mdi-chart-line"></i>
-        <span class="menu-title">Technicians</span>
-      </a>
-    </li>
-    <li class="nav-item ">
-      <a class="nav-link" href="{{ url('/tables/basic-table') }}">
-        <i class="menu-icon mdi mdi-table-large"></i>
-        <span class="menu-title">Assets</span>
-      </a>
-    </li>
-    <li class="nav-item ">
-      <a class="nav-link" href="{{ url('/icons/material') }}">
-        <i class="menu-icon mdi mdi-emoticon"></i>
-        <span class="menu-title">Requester</span>
-      </a>
-    </li>
-    <li class="nav-item ">
-      <a class="nav-link" data-toggle="collapse" href="#user-pages"  aria-controls="user-pages">
-        <i class="menu-icon mdi mdi-lock-outline"></i>
-        <span class="menu-title">Reports</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse " id="user-pages">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url('/user-pages/login') }}">Sell Report</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url('/user-pages/register') }}">Work Report</a>
-          </li>
-        </ul>
-      </div>
+  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Dashboard</p>
+
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="{{ url('/') }}" class="nav-link text-dark bg-light">
+                <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                home
+            </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="https://www.bootstrapdash.com/demo/star-laravel-free/documentation/documentation.html" target="_blank">
-        <i class="menu-icon mdi mdi-file-outline"></i>
-        <span class="menu-title">Feedbacks</span>
-      </a>
+      <a href="#" class="nav-link text-dark">
+                <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                Work Order
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark">
+                <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>
+                Request
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ url('/admin/view_technicians') }}" class="nav-link text-dark">
+                <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+                view Technicians
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ url('/admin/view_technicians') }}" class="nav-link text-dark">
+                <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+                Assets
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ url('/admin/view_requester') }}" class="nav-link text-dark">
+                <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+                Requester
+            </a>
     </li>
   </ul>
-</nav>
+
+  
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();">
+                              {{ __('Logout') }}
+                
+      </a>
+    </li>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                 @csrf
+        </form>
+  </ul>
+</div>
+
+
+
+

@@ -1,53 +1,56 @@
-<nav class="sidebar sidebar-offcanvas dynamic-active-class-disabled" id="sidebar">
-  <ul class="nav">
-    <li class="nav-item nav-profile not-navigation-link">
-      <div class="nav-link">
-        <div class="user-wrapper">
-          <div class="profile-image">
-            <img src="{{ url('assets/images/faces/face8.jpg') }}" alt="profile image">
-          </div>
-          <div class="text-wrapper">
-            <p class="profile-name">{{ Auth::user()->name }}</p>
-            <div class="dropdown" data-display="static">
-              <a href="#" class="nav-link d-flex user-switch-dropdown-toggler" id="UsersettingsDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <small class="designation text-muted">Requester</small>
-                <span class="status-indicator online"></span>
-              </a>
-            </div>
-          </div>
-        </div>
+<div class="vertical-nav bg-white" id="sidebar">
+  <div class="py-4 px-3 mb-4 bg-light">
+    <div class="media d-flex align-items-center">
+     <div class="media-body">
+        <h4 class="m-0">{{ Auth::user()->name }}</h4>
+        <p class="font-weight-normal text-muted mb-0">Requester</p>
       </div>
+    </div>
+  </div>
+
+  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Dashboard</p>
+
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="{{ url('/') }}" class="nav-link text-dark bg-light">
+                <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                home
+            </a>
     </li>
-    <li class="nav-item ">
-      <a class="nav-link" href="{{ url('/') }}">
-        <i class="menu-icon mdi mdi-television"></i>
-        <span class="menu-title">Dashboard</span>
-      </a>
+    <li class="nav-item">
+      <a href="{{ url('/requester/request') }}" class="nav-link text-dark">
+                <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                Request Service
+            </a>
     </li>
-    <li class="nav-item ">
-      <a class="nav-link" href="{{ url('/charts/chartjs') }}">
-        <i class="menu-icon mdi mdi-chart-line"></i>
-        <span class="menu-title">Request Service</span>
-      </a>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark">
+                <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>
+                service status
+            </a>
     </li>
-    
-    <li class="nav-item ">
-      <a class="nav-link" href="{{ url('/charts/chartjs') }}">
-        <i class="menu-icon mdi mdi-chart-line"></i>
-        <span class="menu-title">service status</span>
-      </a>
+    <li class="nav-item">
+      <a href="{{ url('/admin/view_technicians') }}" class="nav-link text-dark">
+                <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+                Profile
+            </a>
     </li>
-    <li class="nav-item ">
-      <a class="nav-link" href="{{ url('/tables/basic-table') }}">
-        <i class="menu-icon mdi mdi-table-large"></i>
-        <span class="menu-title">Feedback</span>
-      </a>
-    </li>
-    <li class="nav-item ">
-      <a class="nav-link" href="{{ url('/icons/material') }}">
-        <i class="menu-icon mdi mdi-emoticon"></i>
-        <span class="menu-title">profile</span>
-      </a>
-    </li>
+   
   </ul>
-</nav>
+
+  
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();">
+                              {{ __('Logout') }}
+                
+      </a>
+    </li>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                 @csrf
+        </form>
+  </ul>
+</div>
+

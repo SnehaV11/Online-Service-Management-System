@@ -1,72 +1,45 @@
 @extends('layouts.master-mini')
 @section('content')
-<div class="content-wrapper d-flex align-items-center justify-content-center auth theme-one" style="background-image: url({{ url('assets/images/auth/login_1.jpg') }}); background-size: cover;">
+<div class="content-wrapper flex align-items-center " style="background-colour:blue; background-size: cover;">
   <div class="row w-100">
-    <div class="col-lg-4 mx-auto">
-      <div class="auto-form-wrapper">
+    <div class="col-lg-4 margin">
+      <div class="formContent auto-form-wrapper">
       <!-- Session Status -->
-      <x-auth-session-status class="mb-4" :status="session('status')" />
-
+      <x-auth-session-status class="mb-4 error" :status="session('status')" />
       <!-- Validation Errors -->
-      <x-auth-validation-errors class="mb-4" :errors="$errors" />
+      <x-auth-validation-errors class="mb-4 error " :errors="$errors" />
         <form method="POST" action="{{ route('login') }}">
           @csrf
+          <h2 class="text-center">login</h2>
           <div class="form-group">
             <label class="label" >email</label>
             <div class="input-group">
               <input type="text" id="email" class="form-control"  type="email" name="email" >
-              <div class="input-group-append">
-                <span class="input-group-text">
-                  <i class="mdi mdi-check-circle-outline"></i>
-                </span>
-              </div>
             </div>
           </div>
           <div class="form-group">
             <label class="label">Password</label>
             <div class="input-group">
               <input  id="password" type="password" class="form-control" name="password" >
-              <div class="input-group-append">
-                <span class="input-group-text">
-                  <i class="mdi mdi-check-circle-outline"></i>
-                </span>
-              </div>
             </div>
           </div>
           <div class="form-group">
             <button class="btn btn-primary submit-btn btn-block">Login</button>
           </div>
           <div class="form-group d-flex justify-content-between">
-            <div class="form-check form-check-flat mt-0">
-              <label class="form-check-label">
-                <input id="remember_me" type="checkbox" class="form-check-input" checked> Keep me signed in </label>
-            </div>
             @if (Route::has('password.request'))
-            <a href="{{ route('password.request') }}" class="text-small forgot-password text-black">Forgot Password</a>
+            <a href="{{ route('password.request') }}" class="text-small ">Forgot Password</a>
              @endif
           </div>
-          <div class="form-group">
-            <button class="btn btn-block g-login">
-              <img class="mr-3" src="{{ url('assets/images/file-icons/icon-google.svg') }}" alt="">Log in with Google</button>
-          </div>
+          
           <div class="text-block text-center my-3">
             <span class="text-small font-weight-semibold">Not a member ?</span>
-            <a href="{{ route('register') }}" class="text-black text-small">Create new account</a>
+            <a href="{{ route('register') }}" class=" text-small">Create new account</a>
           </div>
         </form>
       </div>
-      <ul class="auth-footer">
-        <li>
-          <a href="#">Conditions</a>
-        </li>
-        <li>
-          <a href="#">Help</a>
-        </li>
-        <li>
-          <a href="#">Terms</a>
-        </li>
-      </ul>
-      <p class="footer-text text-center">copyright © 2018 Bootstrapdash. All rights reserved.</p>
+      
+      <p class="footer-text text-center">Online Service Management</p>
     </div>
   </div>
 </div>

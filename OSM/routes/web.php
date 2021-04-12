@@ -138,6 +138,14 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 });
 
+Route::get('requester/request',[DashboardController::class,'request'])->name('request dashboard');
+Route::post('requester/request',[DashboardController::class,'addRequest']);
+
+Route::get('admin/view_technicians',[DashboardController::class,'view_technicians'])->name('view_technicians');
+Route::get('admin/view_requester',[DashboardController::class,'view_requester'])->name('view_requester');
+
+Route::get('admin/add_technician',[DashboardController::class,'add_technician'])->name('add_technicians dashboard');
+Route::post('admin/add_technician',[DashboardController::class,'add_technicians'])->name('add_technician');
 
 
 Route::get('/auth/logout',[DashboardController::class,'logout'])->name('auth.logout');
