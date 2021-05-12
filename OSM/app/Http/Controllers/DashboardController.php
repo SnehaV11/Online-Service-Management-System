@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\submitrequest_tb;
 use App\Models\technician_tb;
+use App\Models\assets_tb;
+use DB;
 class DashboardController extends Controller
 {
     public function index(){
@@ -74,12 +76,44 @@ class DashboardController extends Controller
       $technician_tb->empEmail=$req->empEmail;
       $technician_tb->save();
       return redirect('admin/view_technicians');
- 
- 
- 
- 
+
      }
 
+     function view_assets(){
+      $data= assets_tb::all();
+      return view('admin/view_assets',['assets_tbs'=>$data]);
+      
+    }
+    function add_asset(){
+
+      return view('admin/add_asset');
+    }
+    function add_assets(Request $req){
+      $assets_tb = new assets_tb;
+      $assets_tb->pname=$req->pname;
+      $assets_tb->pdop=$req->pdop;
+      $assets_tb->pava=$req->pava;
+      $assets_tb->ptotal=$req->ptotal;
+      $assets_tb->poriginalcost=$req->poriginalcost;
+      $assets_tb->psellingcost=$req->psellingcost;
+      $assets_tb->save();
+      return redirect('admin/view_assets');
+
+     }
+
+    function delete_technician($empid)
+    {
+      DB::delete('delete from technician_tbs where empid = ?', [$empid]);
+      return redirect('admin/view_technicians')->with('success','Data Deleted');
+    }
+
+    function delete_product($pid)
+    {
+      DB::delete('delete from assets_tbs where pid = ?', [$pid]);
+      return redirect('admin/view_assets')->with('success','Data Deleted');
+    }
+
+     
 
 
 }
