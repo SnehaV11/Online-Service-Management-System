@@ -151,10 +151,12 @@ Route::get('admin/view_assets',[DashboardController::class,'view_assets'])->name
 Route::get('admin/add_asset',[DashboardController::class,'add_asset'])->name('add_assets dashboard');
 Route::post('admin/add_asset',[DashboardController::class,'add_assets'])->name('add_asset');
 
-Route::get('/click_delete_technician/{empid}',[DashboardController::class,'delete_technician'])->name('delete_technician');
+Route::get('/click_delete_technician/{id}',[DashboardController::class,'delete_technician'])->name('delete_technician');
+Route::get('/click_edit_technician/{id}',[DashboardController::class,'edit_technician'])->name('edit_technician');
+Route::post('edit_technician',[DashboardController::class,'update_technician']);
+
 Route::get('/click_delete_Product/{pid}',[DashboardController::class,'delete_product'])->name('delete_product');
 Route::get('/auth/logout',[DashboardController::class,'logout'])->name('auth.logout');
-
 
 
 require __DIR__.'/auth.php';
