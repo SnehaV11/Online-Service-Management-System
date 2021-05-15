@@ -9,8 +9,11 @@ use App\Models\submitrequest_tb;
 use App\Models\technician_tb;
 use App\Models\assets_tb;
 use DB;
+
+
 class DashboardController extends Controller
 {
+  
     public function index(){
         if(Auth::user()->hasRole('admin')){
                 return view('/admin/admin_dashboard');
@@ -75,7 +78,8 @@ class DashboardController extends Controller
       $technician_tb->empMobile=$req->empMobile;
       $technician_tb->empEmail=$req->empEmail;
       $technician_tb->save();
-      return redirect('admin/view_technicians');
+      return redirect('admin/view_technicians')
+      ->with('success','inserted');
 
      }
 
@@ -101,19 +105,49 @@ class DashboardController extends Controller
 
      }
 
-    function delete_technician($empid)
+    function delete_technician($id)
     {
-      DB::delete('delete from technician_tbs where empid = ?', [$empid]);
+      DB::delete('delete from technician_tbs where id = ?', [$id]);
       return redirect('admin/view_technicians')->with('success','Data Deleted');
     }
 
     function delete_product($pid)
     {
-      DB::delete('delete from assets_tbs where pid = ?', [$pid]);
+      DB::delete('delete from assets_tbs where id = ?', [$pid]);
       return redirect('admin/view_assets')->with('success','Data Deleted');
     }
 
-     
+     function edit_technician($id){
+      
+      $data =technician_tb::find( $id);
+      return view('admin/edit_technician',['data'=>$data]);
+     }
+     function update_technician(Request $req){
+       $data= technician_tb::find($req->id);
+       $data->empName=$req->empName;
+       $data->empCity=$req->empCity;
+       $data->empMobile=$req->empMobile;
+       $data->empEmail=$req->empEmail;
+       $data->save();
+       return redirect('admin/view_technicians');
+     }
+
+     function edit_assets($id){
+      
+      $data =assets_tb::find( $id);
+      return view('admin/edit_assets',['data'=>$data]);
+     }
+     function update_assets(Request $req){
+       $data= assets_tb::find($req->id);
+       $data->pname=$req->pname;
+       $data->pdop=$req->pdop;
+       $data->pava=$req->pava;
+       $data->ptotal=$req->ptotal;
+       $data->poriginalcost=$req->poriginalcost;
+       $data->psellingcost=$req->psellingcost;
+       $data->save();
+       return redirect('admin/view_assets');
+     }
 
 
 }

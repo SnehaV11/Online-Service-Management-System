@@ -43,13 +43,14 @@
                 <td>{{$assets_tb['psellingcost']}} </td>
                 <td>
                 <form action="editemp.php" method="POST"> 
-                <input type="hidden" name="id" value='. $row["pid"] .'>
-                <button type="submit" class="btn btn-primary" href="" name="view" >edit</button>
+                <input type="hidden" name="id" value='. $row["id"] .'>
+                <a href="/click_edit_assets/{{ $assets_tb['id'] }}" class="btn btn-primary"> edit </a>
                 @csrf
                 @method('DELETE')
                 </form></td>
                 <td>
-                  <a href="/click_delete_Product/{{ $assets_tb['pid'] }}" class="btn btn-danger"> Delete </a>
+                <a href="/click_delete_Product/{{ $assets_tb['id'] }}" class="btn btn-primary"> sell </a>
+                  <a href="/click_delete_Product/{{ $assets_tb['id'] }}" class="btn btn-danger"> Delete </a>
                 </td>
               </tr>
               <?php 
