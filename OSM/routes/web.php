@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PdfassetsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -158,7 +159,17 @@ Route::get('/click_delete_Product/{id}',[DashboardController::class,'delete_prod
 Route::get('/click_edit_assets/{id}',[DashboardController::class,'edit_assets'])->name('edit_assets');
 Route::post('edit_assets',[DashboardController::class,'update_assets']);
 
-Route::get('/auth/logout',[DashboardController::class,'logout'])->name('auth.logout');
+Route::get('/click_sell_assets/{id}',[DashboardController::class,'add_customer'])->name('add_customer');
+Route::post('/click_sell_assets/{id}',[DashboardController::class,'add_customers'])->name('add_customer');
 
+
+Route::get('admin/assets_pdf', [PdfassetsController::class, 'generatePDF']);
+
+
+
+Route::get('/click_customer_bill',[DashboardController::class,'customer_bill'])->name('customer_bill');
+Route::post('/click_customer_bill',[DashboardController::class,'customer_bills'])->name('customer_bill');
+Route::get('admin/print_invoice/{id}', [PdfassetsController::class, 'print_invoicePDF']);
+Route::get('/auth/logout',[DashboardController::class,'logout'])->name('auth.logout');
 
 require __DIR__.'/auth.php';

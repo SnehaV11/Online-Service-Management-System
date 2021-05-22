@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\submitrequest_tb;
+use App\Models\customer_tb;
 use App\Models\technician_tb;
 use App\Models\assets_tb;
 use DB;
@@ -148,6 +149,51 @@ class DashboardController extends Controller
        $data->save();
        return redirect('admin/view_assets');
      }
+
+     function sell_assets($id){
+      
+      $data =assets_tb::find( $id);
+      return view('admin/sell_assets',['data'=>$data]);
+     }
+
+     function add_customer($id){
+      $data =assets_tb::find( $id);
+
+      return view('admin/add_customer',['data'=>$data]);
+    }
+
+     
+     function add_customers(Request $req){
+      $customer_tb = new customer_tb;
+      $customer_tb->custname=$req->custname;
+      $customer_tb->custadd=$req->custadd;
+      $customer_tb->cpname=$req->cpname;
+      $customer_tb->cpquantity=$req->cpquantity;
+      $customer_tb->cpeach=$req->cpeach;
+      $customer_tb->cptotal=$req->cptotal;
+      $customer_tb->cpdate=$req->cpdate;
+      $customer_tb->save();
+      return redirect('/click_customer_bill');
+ 
+     }
+     function customer_bill(){
+      
+      $data= customer_tb::all();
+      return view ('admin/customer_bill',['customer_tbs'=>$data]);
+     }
+     function customer_bills(Request $req){
+       $data= customer_tb::find($req->id);
+       $customer_tb->custname=$req->custname;
+      $customer_tb->custadd=$req->custadd;
+      $customer_tb->cpname=$req->cpname;
+      $customer_tb->cpquantity=$req->cpquantity;
+      $customer_tb->cpeach=$req->cpeach;
+      $customer_tb->cptotal=$req->cptotal;
+      $customer_tb->cpdate=$req->cpdate;
+      $customer_tb->save();
+       return redirect('admin/customer_bill');
+     }
+
 
 
 }
