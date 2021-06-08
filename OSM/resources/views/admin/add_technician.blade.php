@@ -11,6 +11,7 @@
   <form class="mx-5" action="add_technician" method="POST">
   @csrf
     <div class="form-group">
+    <label for="empName">Technician Name</label>
       <input type="text" class="form-control" id="empName"  name="empName">
     </div>
     <div class="form-group">

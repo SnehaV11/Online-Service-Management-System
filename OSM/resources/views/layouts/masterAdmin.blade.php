@@ -10,8 +10,14 @@
     <!-- CSRF Token -->
   <meta name="_token" content="{{ csrf_token() }}">
   <script src="style.js"></script>
-  {!! Html::style('css/style.css') !!}
-  {!! Html::script('js/style.js') !!}
+  {!! Html::style('assets/plugins/@mdi/font/css/materialdesignicons.min.css') !!}
+  {!! Html::style('assets/plugins/perfect-scrollbar/perfect-scrollbar.css') !!}
+  <!-- end plugin css -->
+
+  @stack('plugin-styles')
+
+  <!-- common css -->
+  {!! Html::style('css/app.css') !!}
   <!-- end common css -->
 
   @stack('style')
@@ -20,21 +26,32 @@
 
   <div class="container-scroller" id="app">
     @include('layouts.header')
-    <div class="">
+    <div class="container-fluid page-body-wrapper">
       @include('layouts.sidebarAdmin')
-      
-      </div>
       <div class="main-panel">
-        
-        @include('layouts.footer')
-    </div>
-    <div class="card-position">
+        <div class="content-wrapper">
           @yield('content')
         </div>
+        @include('layouts.footer')
+      </div>
+    </div>
   </div>
 
   <!-- base js -->
+  {!! Html::script('js/app.js') !!}
+  {!! Html::script('assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') !!}
+  <!-- end base js -->
 
+  <!-- plugin js -->
+  @stack('plugin-scripts')
+  <!-- end plugin js -->
+
+  <!-- common js -->
+  {!! Html::script('assets/js/off-canvas.js') !!}
+  {!! Html::script('assets/js/hoverable-collapse.js') !!}
+  {!! Html::script('assets/js/misc.js') !!}
+  {!! Html::script('assets/js/settings.js') !!}
+  {!! Html::script('assets/js/todolist.js') !!}
   <!-- end common js -->
 
   @stack('custom-scripts')

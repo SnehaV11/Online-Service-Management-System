@@ -33,20 +33,23 @@
             @foreach($technician_tbs as $technician_tb)
               <tr>
                 <td> <?php echo $cnt;?></td>
-                <td> {{$technician_tb['empid']}} </td>
+                <td> {{$technician_tb['id']}} </td>
                 <td>{{$technician_tb['empName']}}</td>
                 <td>{{$technician_tb['empCity']}}</td>
                 <td>{{$technician_tb['empMobile']}}</td>
                 <td>{{$technician_tb['empEmail']}} </td>
                 <td>
                 <form action="editemp.php" method="POST"> 
-                <input type="hidden" name="id" value='. $row["empid"] .'>
-                <button type="submit" class="btn btn-primary" href="" name="view" >edit</button>
+                <input type="hidden" name="id" value='. $row["id"] .'>
+                <a href="/click_edit_technician/{{ $technician_tb['id'] }}" class="btn btn-primary"> edit </a>
                 @csrf
                 @method('DELETE')
                 
-                <button type="submit" class="btn btn-danger" name="delete" value="Delete">delete</button>
                 </form></td>
+                <td>
+                  <a href="/click_delete_technician/{{ $technician_tb['id'] }}" class="btn btn-danger"> Delete </a>
+                  
+                </td>
               </tr>
               <?php 
                         $cnt=$cnt+1;
