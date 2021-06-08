@@ -32,7 +32,7 @@
     </li>
     
     <li class="nav-item ">
-      <a class="nav-link" href="{{ url('/charts/chartjs') }}">
+      <a class="nav-link" href="{{ url('/requester/checkstatus') }}">
         <i class="menu-icon mdi mdi-chart-line"></i>
         <span class="menu-title">service status</span>
       </a>

@@ -31,24 +31,10 @@
       </a>
     </li>
     <li class="nav-item ">
-      <a class="nav-link" data-toggle="collapse" href="#basic-ui"  aria-controls="basic-ui">
+      <a class="nav-link" href="{{ url('/admin/view_request') }}">
         <i class="menu-icon mdi mdi-dna"></i>
-        <span class="menu-title">Requests</span>
-        <i class="menu-arrow"></i>
+        <span class="menu-title">Request</span>
       </a>
-      <div class="collapse " id="basic-ui">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url('/basic-ui/buttons') }}">Buttons</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url('/basic-ui/dropdowns') }}">Dropdowns</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url('/basic-ui/typography') }}">Typography</a>
-          </li>
-        </ul>
-      </div>
     </li>
 
     <li class="nav-item ">
