@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RequesterController;
 use App\Http\Controllers\PdfassetsController;
 /*
 |--------------------------------------------------------------------------
@@ -170,6 +171,20 @@ Route::get('admin/assets_pdf', [PdfassetsController::class, 'generatePDF']);
 Route::get('/click_customer_bill',[DashboardController::class,'customer_bill'])->name('customer_bill');
 Route::post('/click_customer_bill',[DashboardController::class,'customer_bills'])->name('customer_bill');
 Route::get('admin/print_invoice/{id}', [PdfassetsController::class, 'print_invoicePDF']);
+
+Route::get('admin/view_request',[DashboardController::class,'view_request'])->name('view_request');
+Route::get('/click_view_request/{id}',[DashboardController::class,'details_addtechnicians'])->name('details_addtechnicians');
+Route::get('view_request_addtechnician',[DashboardController::class,'update_details']);
+Route::post('/insert',[DashboardController::class,'insert_assignedwork']);
+
+
+
+Route::get('requester/checkstatus',[RequesterController::class,'checkstatus'])->name('checkstatus dashboard');
+Route::post('requester/checkstatus',[RequesterController::class,'reqcheckstatus']);
+Route::get('requester/checkstatus',[RequesterController::class,'view_status'])->name('requester/checkstatus');
+
+Route::get('requester/status', [RequesterController::class,'vi'])->name('requester/status');
+Route::post('requester/status', [RequesterController::class,'vi'])->name('requester/status');
 Route::get('/auth/logout',[DashboardController::class,'logout'])->name('auth.logout');
 
 require __DIR__.'/auth.php';
