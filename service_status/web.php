@@ -149,7 +149,6 @@ Route::get('requester/request',[DashboardController::class,'request'])->name('re
 Route::post('requester/request',[DashboardController::class,'addRequest']);
 
 Route::get('requester/request_status',[DashboardController::class,'request_status'])->name('request_status');
-//Route::post('requester/assign_details',[DashboardController::class,'assign_details'])->name('assign_details');
 Route::get('requester/assign_details',[DashboardController::class,'assign_details'])->name('assign_details');
 
 Route::get('admin/view_technicians',[DashboardController::class,'view_technicians'])->name('view_technicians');
