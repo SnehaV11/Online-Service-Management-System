@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\submitrequest_tb;
 use App\Models\customer_tb;
 use App\Models\technician_tb;
+use App\Models\assignwork_tb;
 use App\Models\assets_tb;
 use DB;
 
@@ -87,7 +88,6 @@ class DashboardController extends Controller
      function view_assets(){
       $data= assets_tb::all();
       return view('admin/view_assets',['assets_tbs'=>$data]);
-      
     }
     function add_asset(){
 
@@ -112,9 +112,9 @@ class DashboardController extends Controller
       return redirect('admin/view_technicians')->with('success','Data Deleted');
     }
 
-    function delete_product($pid)
+    function delete_product($id)
     {
-      DB::delete('delete from assets_tbs where id = ?', [$pid]);
+      DB::delete('delete from assets_tbs where id = ?', [$id]);
       return redirect('admin/view_assets')->with('success','Data Deleted');
     }
 
@@ -158,7 +158,6 @@ class DashboardController extends Controller
 
      function add_customer($id){
       $data =assets_tb::find( $id);
-
       return view('admin/add_customer',['data'=>$data]);
     }
 
@@ -193,6 +192,47 @@ class DashboardController extends Controller
       $customer_tb->save();
        return redirect('admin/customer_bill');
      }
+
+     function view_request(){
+      $data= submitrequest_tb::all();
+      return view('admin/view_request',['submitrequest_tbs'=>$data]);
+      
+    }
+
+    function details_addtechnicians($id){
+      
+      $data =submitrequest_tb::find( $id);
+      return view('admin/details_addtechnicians',['data'=>$data]);
+     }
+     function update_details(Request $req){
+       $data= submitrequest_tb::find($req->id);
+     }
+
+     function insert_assignedwork(Request $req){
+      $assignwork_tb = new assignwork_tb;
+      $assignwork_tb->request_id=$req->request_id;
+      $assignwork_tb->request_info=$req->request_info;
+      $assignwork_tb->request_desc=$req->request_desc;
+      $assignwork_tb->requester_name=$req->requester_name;
+      $assignwork_tb->requester_add1=$req->requester_add1;
+      $assignwork_tb->requester_add2=$req->requester_add2;
+      $assignwork_tb->requester_city=$req->requester_city;
+      $assignwork_tb->requester_state=$req->requester_state;
+      $assignwork_tb->requester_zip=$req->requester_zip;
+      $assignwork_tb->requester_email=$req->requester_email;
+      $assignwork_tb->requester_mobile=$req->requester_mobile;
+      $assignwork_tb->assign_tech=$req->assign_tech;
+      $assignwork_tb->assign_date=$req->assign_date;
+      $assignwork_tb->save();
+      return redirect('admin/view_request');
+      
+     }
+
+     function work_order(){
+      $data= assignwork_tb::all();
+      return view('admin/work_order',['assignwork_tbs'=>$data]);
+    }
+
 
 
 

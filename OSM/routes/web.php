@@ -185,6 +185,9 @@ Route::get('requester/checkstatus',[RequesterController::class,'view_status'])->
 
 Route::get('requester/status', [RequesterController::class,'vi'])->name('requester/status');
 Route::post('requester/status', [RequesterController::class,'vi'])->name('requester/status');
+
+Route::get('admin/work_order',[DashboardController::class,'work_order'])->name('work_order');
+
 Route::get('/auth/logout',[DashboardController::class,'logout'])->name('auth.logout');
 
 require __DIR__.'/auth.php';
