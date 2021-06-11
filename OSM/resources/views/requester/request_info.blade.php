@@ -11,7 +11,7 @@
 
         @if(session('success'))
         <div class="alert alert-dark mt-4" role="alert">{{session('success')}}</div>
-@endif
+        @endif
   </div>
     </div>
   </div>
