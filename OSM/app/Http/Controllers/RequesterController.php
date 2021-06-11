@@ -25,7 +25,6 @@ class RequesterController extends Controller
 
       public function view_status(Request $request){
         $search = $request->input('search');
-
         // Search in the title and body columns from the posts table
         $assignwork_tbs = assignwork_tb::query()
             ->where('request_id', 'LIKE', "%{$search}%")
@@ -34,14 +33,12 @@ class RequesterController extends Controller
         return view('requester/checkstatus', compact('assignwork_tbs'));
     }
 
-    function vi(Request $request){
+    function Request_status(Request $request){
         $search = $request->input('search');
-
         // Search in the title and body columns from the posts table
         $assignwork_tbs = assignwork_tb::query()
             ->where('request_id', 'LIKE', "%{$search}%")
             ->get();
-        
         // Return the search view with the resluts compacted
         return view('requester/status', compact('assignwork_tbs'));
 
@@ -70,8 +67,6 @@ class RequesterController extends Controller
        'request_date'=>$req->request_date,
           );
           $result =DB::table('submitrequest_tbs')->insertGetId($data);
-          
-          
           return redirect('requester/request_info')->with('success',"your request id is $result Please keep a note of it for further Process");
       }
  

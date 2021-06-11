@@ -36,7 +36,7 @@ class PdfassetsController extends Controller
         <html lang="en">
           <head>
             <meta charset="utf-8">
-            <title>Example 2</title>
+            <title>Product reciept</title>
             <style>
             @font-face {
                 font-family: SourceSansPro;

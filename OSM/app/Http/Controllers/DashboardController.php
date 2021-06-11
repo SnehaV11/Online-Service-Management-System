@@ -41,34 +41,8 @@ class DashboardController extends Controller
     function view_requester(){
       $data= submitrequest_tb::all();
       return view('admin/view_requester',['submitrequest_tbs'=>$data]);
-      
     }
     
-    function request(){
-
-      return view('requester/request');
-    }
-
-    function addRequest(Request $req){
-     $submitrequest_tb = new submitrequest_tb;
-     $submitrequest_tb->request_info=$req->request_info;
-     $submitrequest_tb->request_desc=$req->request_desc;
-     $submitrequest_tb->requester_name=$req->requester_name;
-     $submitrequest_tb->requester_add1=$req->requester_add1;
-     $submitrequest_tb->requester_add2=$req->requester_add2;
-     $submitrequest_tb->requester_city=$req->requester_city;
-     $submitrequest_tb->requester_state=$req->requester_state;
-     $submitrequest_tb->requester_zip=$req->requester_zip;
-     $submitrequest_tb->requester_email=$req->requester_email;
-     $submitrequest_tb->requester_mobile=$req->requester_mobile;
-     $submitrequest_tb->request_date=$req->request_date;
-     $submitrequest_tb->save();
-     return redirect('requester/request');
-
-
-
-
-    }
     function add_technician(){
 
       return view('admin/add_technician');
@@ -87,7 +61,7 @@ class DashboardController extends Controller
 
      function view_assets(){
       $data= assets_tb::all();
-      return view('admin/view_assets',['assets_tbs'=>$data]);
+      return view('admin/view_assets', ['assets_tbs'=>$data]);
     }
     function add_asset(){
 
@@ -132,7 +106,6 @@ class DashboardController extends Controller
        $data->save();
        return redirect('admin/view_technicians');
      }
-
      function edit_assets($id){
       
       $data =assets_tb::find( $id);

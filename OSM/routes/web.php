@@ -166,8 +166,6 @@ Route::post('/click_sell_assets/{id}',[DashboardController::class,'add_customers
 
 Route::get('admin/assets_pdf', [PdfassetsController::class, 'generatePDF']);
 
-
-
 Route::get('/click_customer_bill',[DashboardController::class,'customer_bill'])->name('customer_bill');
 Route::post('/click_customer_bill',[DashboardController::class,'customer_bills'])->name('customer_bill');
 Route::get('admin/print_invoice/{id}', [PdfassetsController::class, 'print_invoicePDF']);
@@ -177,16 +175,20 @@ Route::get('/click_view_request/{id}',[DashboardController::class,'details_addte
 Route::get('view_request_addtechnician',[DashboardController::class,'update_details']);
 Route::post('/insert',[DashboardController::class,'insert_assignedwork']);
 
-
-
 Route::get('requester/checkstatus',[RequesterController::class,'checkstatus'])->name('checkstatus dashboard');
 Route::post('requester/checkstatus',[RequesterController::class,'reqcheckstatus']);
 Route::get('requester/checkstatus',[RequesterController::class,'view_status'])->name('requester/checkstatus');
 
-Route::get('requester/status', [RequesterController::class,'vi'])->name('requester/status');
-Route::post('requester/status', [RequesterController::class,'vi'])->name('requester/status');
+Route::get('requester/status', [RequesterController::class,'Request_status'])->name('requester/status');
+Route::post('requester/status', [RequesterController::class,'Request_status'])->name('requester/status');
 
 Route::get('admin/work_order',[DashboardController::class,'work_order'])->name('work_order');
+
+Route::get('requester/request',[RequesterController::class,'request'])->name('requestdashboard');
+Route::post('requester/request',[RequesterController::class,'addRequest'])->name('requeststore');
+
+Route::get('requester/request_info',[RequesterController::class,'request_info'])->name('request_info');
+Route::post('requester/request_info',[RequesterController::class,'request_info'])->name('request_info');
 
 Route::get('/auth/logout',[DashboardController::class,'logout'])->name('auth.logout');
 
