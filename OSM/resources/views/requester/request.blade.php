@@ -6,9 +6,10 @@
     <div class="card">
       <div class="card-body">
         <center><h1 class="card-title"> Service Request</h1></center>
-        <div class="col-sm-9 col-md-10 mt-5">
-  <form class="mx-5" action="request" method="POST">
+        <div class="col-sm-9 co  l-md-10 mt-5">
+  <form class="mx-5" action="{{route('requeststore')}}" method="POST">
   @csrf
+  
     <div class="form-group">
       <label for="inputRequestInfo">Request information</label>
       <input type="text" class="form-control" id="inputRequestInfo" placeholder="Request information" name="request_info">
@@ -60,9 +61,9 @@
         <input type="date" class="form-control" id="inputDate" name="request_date">
       </div>
     </div>
+    <button type="submit" class="btn btn-secondary">submit</button>
 
-    <button type="submit" class="btn btn-danger" name="submitRequest">Submit</button>
-    <button type="reset" class="btn btn-secondary">Reset</button>
+    <button type="Reset" class="btn btn-secondary">Reset</button>
   </form>
       </div>
     </div>
