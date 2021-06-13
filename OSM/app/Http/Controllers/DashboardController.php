@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\AssetsImport;
 use App\Models\submitrequest_tb;
 use App\Models\customer_tb;
 use App\Models\technician_tb;
@@ -204,6 +206,16 @@ class DashboardController extends Controller
      function work_order(){
       $data= assignwork_tb::all();
       return view('admin/work_order',['assignwork_tbs'=>$data]);
+    }
+
+    public function importexcel(){
+      return view('admin/add_asset');
+    }
+
+    public function import(){
+      $data= assets_tb::all();
+      Excel::import(new AssetsImport,request()->file('file'));
+      return view('admin/view_assets', ['assets_tbs'=>$data]);
     }
 
 

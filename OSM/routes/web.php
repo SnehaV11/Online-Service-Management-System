@@ -190,6 +190,10 @@ Route::post('requester/request',[RequesterController::class,'addRequest'])->name
 Route::get('requester/request_info',[RequesterController::class,'request_info'])->name('request_info');
 Route::post('requester/request_info',[RequesterController::class,'request_info'])->name('request_info');
 
+Route::get('admin/add_asset',[DashboardController::class,'importexcel'])->name('add_asset');
+Route::post('admin/add_asset',[DashboardController::class,'import'])->name('add_asset');
+
 Route::get('/auth/logout',[DashboardController::class,'logout'])->name('auth.logout');
+
 
 require __DIR__.'/auth.php';
