@@ -7,6 +7,10 @@
       <div class="card-body">
       <label for="pName"> Choose CSV to Add new Product</label>
 <div class="card-body">
+
+@if(session('success'))
+        <div class="alert alert-dark mt-4" role="alert">{{session('success')}}</div>
+        @endif
 <form class="mx-5" action="add_asset" method="POST" enctype="multipart/form-data">
   @csrf
       <input type="file" class="form-group col-md-4" id="file"  name="file">

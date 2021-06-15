@@ -69,11 +69,16 @@
         <input type="date" class="form-control" id="inputDate" name="request_date" value="{{$data['request_date']}}">
       </div>
     </div>
-    <div class="form-group col-md-4">
-        <label for="inputDate">Add Technician</label>
-        
-        <input type="text" class="form-control" id="assign_tech" name="assign_tech">
-      </div>
+    <div class="form-group col-md-12">
+        <label for="assign_tech">Add Technician</label>
+        <select name="assign_tech"  style="width:350px">
+        <option value="">---select technician---</option>
+        @foreach ($data as $key => $value)
+        <option value="{{ $key }}">{{ $value }}</option>
+        <option value="trusm">trusm</option>
+        @endforeach
+        </select> 
+        </div>
 
       <div class="form-group col-md-4">
         <label for="inputDate">assign_date</label>

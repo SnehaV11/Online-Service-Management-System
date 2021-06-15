@@ -6,7 +6,7 @@
   <div class="col-lg-12 ">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">View Requester</h4>
+        <h4 class="card-title">View Request</h4>
         <div class="table-responsive">
           <table class="table table-striped">
           <thead>
@@ -19,7 +19,9 @@
               </tr>
             </thead>
             <tbody>
-            
+            @if(session('success'))
+        <div class="alert alert-dark mt-4"  role="alert">{{session('success')}}</div>
+        @endif
             <?php  $cnt=1;?>
             @foreach($submitrequest_tbs as $submitrequest_tb)
             
@@ -35,8 +37,12 @@
                 @csrf
                 @method('DELETE')
                 
-                <a href="/click_view_request/{{ $submitrequest_tb['id'] }}" class="btn btn-primary"> view </a>
                 </form></td>
+                <td>
+                <a href="/click_view_request/{{ $submitrequest_tb['id'] }}" class="btn btn-primary"> view </a>
+                <a href="/click_delete_request/{{ $submitrequest_tb['id'] }}" class="btn btn-success">Close </a>
+                
+                </td>
               </tr>
               <?php 
                         $cnt=$cnt+1;

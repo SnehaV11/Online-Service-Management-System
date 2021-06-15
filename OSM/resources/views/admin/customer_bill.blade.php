@@ -6,6 +6,9 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Customer Details</h4>
+        @if(session('success'))
+        <div class="alert alert-dark mt-4" role="alert">{{session('success')}}</div>
+        @endif
         <div class="table-responsive">
           <table class="table table-striped">
           <thead>

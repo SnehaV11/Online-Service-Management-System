@@ -57,7 +57,7 @@ class DashboardController extends Controller
       $technician_tb->empEmail=$req->empEmail;
       $technician_tb->save();
       return redirect('admin/view_technicians')
-      ->with('success','inserted');
+      ->with('success','Data inserted successfully');
 
      }
 
@@ -78,8 +78,7 @@ class DashboardController extends Controller
       $assets_tb->poriginalcost=$req->poriginalcost;
       $assets_tb->psellingcost=$req->psellingcost;
       $assets_tb->save();
-      return redirect('admin/view_assets');
-
+      return redirect('admin/view_assets')->with('success','Data inserted successfully');
      }
 
     function delete_technician($id)
@@ -106,7 +105,7 @@ class DashboardController extends Controller
        $data->empMobile=$req->empMobile;
        $data->empEmail=$req->empEmail;
        $data->save();
-       return redirect('admin/view_technicians');
+       return redirect('admin/view_technicians')->with('success','Data updated successfully ');
      }
      function edit_assets($id){
       
@@ -122,7 +121,7 @@ class DashboardController extends Controller
        $data->poriginalcost=$req->poriginalcost;
        $data->psellingcost=$req->psellingcost;
        $data->save();
-       return redirect('admin/view_assets');
+       return redirect('admin/view_assets')->with('success','Data Updated successfully');
      }
 
      function sell_assets($id){
@@ -147,13 +146,13 @@ class DashboardController extends Controller
       $customer_tb->cptotal=$req->cptotal;
       $customer_tb->cpdate=$req->cpdate;
       $customer_tb->save();
-      return redirect('/click_customer_bill');
+      return redirect('/click_customer_bill')->with('success',' Customer Bill Generated ');
  
      }
      function customer_bill(){
       
       $data= customer_tb::all();
-      return view ('admin/customer_bill',['customer_tbs'=>$data]);
+      return view ('admin/customer_bill',['customer_tbs'=>$data])->with('success',' Customer Bill Generated ');
      }
      function customer_bills(Request $req){
        $data= customer_tb::find($req->id);
@@ -165,7 +164,7 @@ class DashboardController extends Controller
       $customer_tb->cptotal=$req->cptotal;
       $customer_tb->cpdate=$req->cpdate;
       $customer_tb->save();
-       return redirect('admin/customer_bill');
+       return redirect('admin/customer_bill')->with('success',' Customer Bill Generated ');
      }
 
      function view_request(){
@@ -203,7 +202,7 @@ class DashboardController extends Controller
       
      }
 
-     function work_order(){
+     function work_order(){ 
       $data= assignwork_tb::all();
       return view('admin/work_order',['assignwork_tbs'=>$data]);
     }
@@ -216,6 +215,22 @@ class DashboardController extends Controller
       $data= assets_tb::all();
       Excel::import(new AssetsImport,request()->file('file'));
       return view('admin/view_assets', ['assets_tbs'=>$data]);
+    }
+    public function myform(){
+      $data =DB::table("technician_tbs")->pluck("empName","empName");
+      return view('admin/details_addtechnicians',compact('data'));
+     }
+
+     function delete_request($id)
+    {
+      DB::delete('delete from submitrequest_tbs where id = ?', [$id]);
+      return redirect('admin/view_request')->with('success','action has been taken for the Request ');
+    }
+
+    function delete_requester($id)
+    {
+      DB::delete('delete from submitrequest_tbs where id = ?', [$id]);
+      return redirect('admin/view_requester')->with('success','data deleted ');
     }
 
 
