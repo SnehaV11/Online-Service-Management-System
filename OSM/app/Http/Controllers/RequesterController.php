@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\submitrequest_tb;
+use App\Models\request_tb;
 use App\Models\customer_tb;
 use App\Models\technician_tb;
 use App\Models\assignwork_tb;
@@ -54,11 +55,11 @@ class RequesterController extends Controller
 
       function addRequest(Request $req){
           $data= array(
+              'user_id'=>$req->user_id,
        'request_info'=>$req->request_info,
        'request_desc'=>$req->request_desc,
        'requester_name'=>$req->requester_name,
-       'requester_add1'=>$req->requester_add1,
-       'requester_add2'=>$req->requester_add2,
+       'requester_add'=>$req->requester_add,
        'requester_city'=>$req->requester_city,
        'requester_state'=>$req->requester_state,
        'requester_zip'=>$req->requester_zip,
@@ -66,8 +67,29 @@ class RequesterController extends Controller
        'requester_mobile'=>$req->requester_mobile,
        'request_date'=>$req->request_date,
           );
-          $result =DB::table('submitrequest_tbs')->insertGetId($data);
+          $result =DB::table('request_tbs')->insertGetId($data);
           return redirect('requester/request_info')->with('success',"your request id is $result Please keep a note of it for further Process");
+      }
+
+      function old_request(){
+        //$data = DB::table('request_tb')->get();
+        $user_id=  Auth::user()->id ;
+        $data=DB::table('request_tbs')->select('request_info','id','request_desc','request_date','requester_name','requester_add'
+        ,'requester_city','requester_state','requester_zip','requester_email','requester_mobile')->where('user_id','=',$user_id)->get();
+        return view('requester/old_request', ['data' => $data]);
+      }
+
+      function requester_dashboard(){
+        $user_id=  Auth::user()->id ;
+        $pending_request=DB::table('request_tbs')->select('request_id')->where('user_id','=',$user_id)->count();
+        $old_request=DB::table('assignwork_tbs')->select('id')->where('user_id','=',$user_id)->count();
+        return view('requester/requester_dashboard',compact('pending_request','old_request'));
+      }
+
+      function fetch_data_requester(){
+        $user_id=  Auth::user()->id ;
+         $pending_request=DB::table('request_tb')->select('request_id')->where('user_id','=',$user_id)->count();
+        return view('requester/requester_dashboard',compact('pending_request'));
       }
  
 }

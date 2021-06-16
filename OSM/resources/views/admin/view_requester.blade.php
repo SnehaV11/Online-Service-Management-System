@@ -8,9 +8,6 @@
       <div class="card-body">
         <h4 class="card-title">View Requester</h4>
         <div class="table-responsive">
-        @if(session('success'))
-        <div class="alert alert-dark mt-4" role="alert">{{session('success')}}</div>
-        @endif
           <table class="table table-striped">
           <thead>
               <tr>
@@ -37,12 +34,8 @@
                 @csrf
                 @method('DELETE')
                 
+                <button type="submit" class="btn btn-danger" name="delete" value="Delete">delete</button>
                 </form></td>
-
-                <td>
-                <a href="/click_delete_requester/{{ $submitrequest_tb['id'] }}" class="btn btn-danger">Delete </a>
-                
-                </td>
               </tr>
               <?php 
                         $cnt=$cnt+1;

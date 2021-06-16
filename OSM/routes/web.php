@@ -133,7 +133,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('admin/admin_dashboard',[DashboardController::class,'admin_dashboard'])->name('admin_dashboard');
 
+Route::get('requester/requester_dashboard',[RequesterController::class,'requester_dashboard'])->name('Requester_dashboard');
 
 
 Route::group(['middleware'=>['auth']],function(){
@@ -195,6 +197,11 @@ Route::post('requester/request_info',[RequesterController::class,'request_info']
 
 Route::get('admin/details_addtechnicians',array('as'=>'myform','uses'=>'App\Http\Controllers\DashboardController@myform'));
 Route::get('/click_delete_request/{id}',[DashboardController::class,'delete_request'])->name('delete_request');
+
+Route::get('admin/admin_dashboard',[DashboardController::class,'fetch_data_admin'])->name('fetch_data_admin');
+Route::get('admin/requester_dashboard',[DashboardController::class,'fetch_data_requester'])->name('fetch_data_requester');
+
+Route::get('requester/old_request',[RequesterController::class,'old_request'])->name('old_request');
 
 Route::get('/auth/logout',[DashboardController::class,'logout'])->name('auth.logout');
 

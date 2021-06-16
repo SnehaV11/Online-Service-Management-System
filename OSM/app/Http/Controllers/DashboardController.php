@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\AssetsImport;
 use App\Models\submitrequest_tb;
+use App\Models\request_tb;
 use App\Models\customer_tb;
 use App\Models\technician_tb;
 use App\Models\assignwork_tb;
@@ -34,7 +35,9 @@ class DashboardController extends Controller
         }
       }
 
-    
+      function admin_dashboard(){
+        return view('admin/admin_dashboard');
+      }
     function view_technicians(){
       $data= technician_tb::all();
       return view('admin/view_technicians',['technician_tbs'=>$data]);
@@ -46,7 +49,6 @@ class DashboardController extends Controller
     }
     
     function add_technician(){
-
       return view('admin/add_technician');
     }
     function add_technicians(Request $req){
@@ -66,7 +68,6 @@ class DashboardController extends Controller
       return view('admin/view_assets', ['assets_tbs'=>$data]);
     }
     function add_asset(){
-
       return view('admin/add_asset');
     }
     function add_assets(Request $req){
@@ -94,7 +95,6 @@ class DashboardController extends Controller
     }
 
      function edit_technician($id){
-      
       $data =technician_tb::find( $id);
       return view('admin/edit_technician',['data'=>$data]);
      }
@@ -135,7 +135,6 @@ class DashboardController extends Controller
       return view('admin/add_customer',['data'=>$data]);
     }
 
-     
      function add_customers(Request $req){
       $customer_tb = new customer_tb;
       $customer_tb->custname=$req->custname;
@@ -168,14 +167,13 @@ class DashboardController extends Controller
      }
 
      function view_request(){
-      $data= submitrequest_tb::all();
-      return view('admin/view_request',['submitrequest_tbs'=>$data]);
+      $data= request_tb::all();
+      return view('admin/view_request',['request_tbs'=>$data]);
       
     }
 
     function details_addtechnicians($id){
-      
-      $data =submitrequest_tb::find( $id);
+      $data =request_tb::find( $id);
       return view('admin/details_addtechnicians',['data'=>$data]);
      }
      function update_details(Request $req){
@@ -185,11 +183,12 @@ class DashboardController extends Controller
      function insert_assignedwork(Request $req){
       $assignwork_tb = new assignwork_tb;
       $assignwork_tb->request_id=$req->request_id;
+      
+      $assignwork_tb->user_id=$req->user_id;
       $assignwork_tb->request_info=$req->request_info;
       $assignwork_tb->request_desc=$req->request_desc;
       $assignwork_tb->requester_name=$req->requester_name;
-      $assignwork_tb->requester_add1=$req->requester_add1;
-      $assignwork_tb->requester_add2=$req->requester_add2;
+      $assignwork_tb->requester_add=$req->requester_add;
       $assignwork_tb->requester_city=$req->requester_city;
       $assignwork_tb->requester_state=$req->requester_state;
       $assignwork_tb->requester_zip=$req->requester_zip;
@@ -198,8 +197,8 @@ class DashboardController extends Controller
       $assignwork_tb->assign_tech=$req->assign_tech;
       $assignwork_tb->assign_date=$req->assign_date;
       $assignwork_tb->save();
-      return redirect('admin/view_request');
-      
+      return redirect('admin/view_request')->with('success','action has been taken for the Request ');
+    
      }
 
      function work_order(){ 
@@ -223,16 +222,26 @@ class DashboardController extends Controller
 
      function delete_request($id)
     {
-      DB::delete('delete from submitrequest_tbs where id = ?', [$id]);
+      DB::delete('delete from request_tbs where id = ?', [$id]);
       return redirect('admin/view_request')->with('success','action has been taken for the Request ');
     }
-
+   
     function delete_requester($id)
     {
       DB::delete('delete from submitrequest_tbs where id = ?', [$id]);
       return redirect('admin/view_requester')->with('success','data deleted ');
     }
 
+
+     function fetch_data_admin(){
+      $new_request=DB::table('submitrequest_tbs')->count();
+      $request_work_assigned=DB::table('assignwork_tbs')->count();
+      $Total_technicians=DB::table('technician_tbs')->count();
+      $customer=DB::table('customer_tbs')->count();
+      return view('admin/admin_dashboard',compact('new_request','request_work_assigned','Total_technicians','customer'));
+    }
+
+   
 
 
 
