@@ -1,13 +1,28 @@
 @extends('layouts.masterAdmin')
 @section('content')
+<section>
 <div class="row">
 <div class="col-lg-12 ">
     <div class="card">
       <div class="card-body">
-<div><a class="btn btn-primary " href="{{ url('/admin/add_asset') }}">Add New Product</a>
+      <label for="pName"> Choose CSV to Add new Product</label>
+<div class="card-body">
+
+@if(session('success'))
+        <div class="alert alert-dark mt-4" role="alert">{{session('success')}}</div>
+        @endif
+<form class="mx-5" action="add_asset" method="POST" enctype="multipart/form-data">
+  @csrf
+      <input type="file" class="form-group col-md-4" id="file"  name="file">
+    <button type="submit" class="btn btn-primary">submit</button>
+    <div class="card-body">
+    </form>
 </div>
 </div>
+<label for="pName">Add Manually</label>
+<div><a class="btn btn-primary " href="{{ url('/admin/add_asset') }}">Add New Product </a>
 </div>
+</section>
 <div class="row">
   <div class="col-lg-12 ">
     <div class="card">
@@ -34,7 +49,7 @@
             @foreach($assets_tbs as $assets_tb)
               <tr>
                 <td> <?php echo $cnt;?></td>
-                <td> {{$assets_tb['pid']}} </td>
+                <td>{{$assets_tb['id']}} </td>
                 <td>{{$assets_tb['pname']}}</td>
                 <td>{{$assets_tb['pdop']}}</td>
                 <td>{{$assets_tb['pava']}}</td>
@@ -49,7 +64,7 @@
                 @method('DELETE')
                 </form></td>
                 <td>
-                <a href="/click_delete_Product/{{ $assets_tb['id'] }}" class="btn btn-primary"> sell </a>
+                <a href="/click_sell_assets/{{ $assets_tb['id'] }}" class="btn btn-primary"> sell </a>
                   <a href="/click_delete_Product/{{ $assets_tb['id'] }}" class="btn btn-danger"> Delete </a>
                 </td>
               </tr>

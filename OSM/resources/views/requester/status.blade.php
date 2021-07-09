@@ -40,7 +40,7 @@
       <tr>
         <td>Address Line 1</td>
         <td>
-        {{ $assignwork_tb->requester_add1 }}
+        {{ $assignwork_tb->requester_add }}
         </td>
       </tr>
       <tr>

@@ -6,10 +6,13 @@
     <div class="card">
       <div class="card-body">
         <center><h1 class="card-title"> Service Request</h1></center>
+        
         <div class="col-sm-9 co  l-md-10 mt-5">
   <form class="mx-5" action="{{route('requeststore')}}" method="POST">
+ 
   @csrf
-  
+ 
+  <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
     <div class="form-group">
       <label for="inputRequestInfo">Request information</label>
       <input type="text" class="form-control" id="inputRequestInfo" placeholder="Request information" name="request_info">
@@ -22,16 +25,12 @@
       <label for="inputName">Name</label>
       <input type="text" class="form-control" id="inputName"  name="requester_name">
     </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputAddress">Address 1</label>
-        <input type="text" class="form-control" id="inputAddress"  name="requester_add1">
+    
+      <div class="form-group ">
+        <label for="inputAddress">Address</label>
+        <input type="text" class="form-control" id="inputAddress"  name="requester_add">
       </div>
-      <div class="form-group col-md-6">
-        <label for="inputAddress2">Address 2</label>
-        <input type="text" class="form-control" id="inputAddress2"  name="requester_add2">
-      </div>
-    </div>
+    
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="inputCity">City</label>

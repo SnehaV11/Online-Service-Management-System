@@ -9,4 +9,6 @@ class assets_tb extends Model
 {
     use HasFactory;
     public $timestamps=false;
+
+    protected $fillable = ['pname','pdop','pava','ptotal','poriginalcost','psellingcost', ];
 }

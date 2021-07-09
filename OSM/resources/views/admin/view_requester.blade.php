@@ -14,7 +14,7 @@
                 <th> # </th>
                 <th> Request ID </th>
                 <th> Requester Name </th>
-                <th> Technician Email </th>
+                <th> Requester Email </th>
                 <th> Action </th>
               </tr>
             </thead>
@@ -24,7 +24,7 @@
             @foreach($submitrequest_tbs as $submitrequest_tb)
               <tr>
                 <td> <?php echo $cnt;?></td>
-                <td> {{$submitrequest_tb['request_id']}} </td>
+                <td> {{$submitrequest_tb['id']}} </td>
                 <td>{{$submitrequest_tb['requester_name']}}</td>
                 <td>{{$submitrequest_tb['requester_email']}} </td>
                 <td>

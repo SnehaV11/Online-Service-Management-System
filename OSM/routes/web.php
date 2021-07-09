@@ -133,7 +133,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('admin/admin_dashboard',[DashboardController::class,'admin_dashboard'])->name('admin_dashboard');
 
+Route::get('requester/requester_dashboard',[RequesterController::class,'requester_dashboard'])->name('Requester_dashboard');
 
 
 Route::group(['middleware'=>['auth']],function(){
@@ -145,6 +147,7 @@ Route::post('requester/request',[DashboardController::class,'addRequest']);
 
 Route::get('admin/view_technicians',[DashboardController::class,'view_technicians'])->name('view_technicians');
 Route::get('admin/view_requester',[DashboardController::class,'view_requester'])->name('view_requester');
+Route::get('/click_delete_requester/{id}',[DashboardController::class,'delete_requester'])->name('delete_requester');
 
 Route::get('admin/add_technician',[DashboardController::class,'add_technician'])->name('add_technicians dashboard');
 Route::post('admin/add_technician',[DashboardController::class,'add_technicians'])->name('add_technician');
@@ -155,6 +158,7 @@ Route::post('edit_technician',[DashboardController::class,'update_technician']);
 Route::get('admin/view_assets',[DashboardController::class,'view_assets'])->name('view_assets');
 Route::get('admin/add_asset',[DashboardController::class,'add_asset'])->name('add_assets dashboard');
 Route::post('admin/add_asset',[DashboardController::class,'add_assets'])->name('add_asset');
+
 
 Route::get('/click_delete_Product/{id}',[DashboardController::class,'delete_product'])->name('delete_product');
 Route::get('/click_edit_assets/{id}',[DashboardController::class,'edit_assets'])->name('edit_assets');
@@ -190,6 +194,16 @@ Route::post('requester/request',[RequesterController::class,'addRequest'])->name
 Route::get('requester/request_info',[RequesterController::class,'request_info'])->name('request_info');
 Route::post('requester/request_info',[RequesterController::class,'request_info'])->name('request_info');
 
+
+Route::get('admin/details_addtechnicians',array('as'=>'myform','uses'=>'App\Http\Controllers\DashboardController@myform'));
+Route::get('/click_delete_request/{id}',[DashboardController::class,'delete_request'])->name('delete_request');
+
+Route::get('admin/admin_dashboard',[DashboardController::class,'fetch_data_admin'])->name('fetch_data_admin');
+Route::get('admin/requester_dashboard',[DashboardController::class,'fetch_data_requester'])->name('fetch_data_requester');
+
+Route::get('requester/old_request',[RequesterController::class,'old_request'])->name('old_request');
+
 Route::get('/auth/logout',[DashboardController::class,'logout'])->name('auth.logout');
+
 
 require __DIR__.'/auth.php';

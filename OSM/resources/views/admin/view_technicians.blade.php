@@ -15,6 +15,9 @@
       <div class="card-body">
         <h4 class="card-title">Technician Details</h4>
         <div class="table-responsive">
+        @if(session('success'))
+        <div class="alert alert-dark mt-4" role="alert">{{session('success')}}</div>
+        @endif
           <table class="table table-striped">
           <thead>
               <tr>
