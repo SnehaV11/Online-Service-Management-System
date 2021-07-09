@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RequesterController;
+use App\Http\Controllers\PdfassetsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -125,20 +127,15 @@ Route::group(['prefix' => 'ecommerce'], function(){
     Route::get('orders', function () { return view('pages.ecommerce.orders'); });
 });
 
-/************routes delete data **************/
-Route::get('/click_delete/{empid}','App\Http\Controllers\DashboardController@delete_function');
-
-/************routes edit data ****************/
-Route::get('/click_edit/{empid}','App\Http\Controllers\DashboardController@edit_function');
-
-Route::post('/update/{empid}','App\Http\Controllers\DashboardController@update_function');
 
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('admin/admin_dashboard',[DashboardController::class,'admin_dashboard'])->name('admin_dashboard');
 
+Route::get('requester/requester_dashboard',[RequesterController::class,'requester_dashboard'])->name('Requester_dashboard');
 
 
 Route::group(['middleware'=>['auth']],function(){
@@ -148,21 +145,78 @@ Route::group(['middleware'=>['auth']],function(){
 Route::get('requester/request',[DashboardController::class,'request'])->name('request dashboard');
 Route::post('requester/request',[DashboardController::class,'addRequest']);
 
-Route::get('requester/feedback',[DashboardController::class,'feedback'])->name('feedback dashboard');
-Route::post('requester/feedback',[DashboardController::class,'addFeedback']);
-
-Route::get('requester/request_status',[DashboardController::class,'request_status'])->name('request_status');
-Route::get('requester/assign_details',[DashboardController::class,'assign_details'])->name('assign_details');
-
-
-
 Route::get('admin/view_technicians',[DashboardController::class,'view_technicians'])->name('view_technicians');
 Route::get('admin/view_requester',[DashboardController::class,'view_requester'])->name('view_requester');
+Route::get('/click_delete_requester/{id}',[DashboardController::class,'delete_requester'])->name('delete_requester');
 
 Route::get('admin/add_technician',[DashboardController::class,'add_technician'])->name('add_technicians dashboard');
 Route::post('admin/add_technician',[DashboardController::class,'add_technicians'])->name('add_technician');
+Route::get('/click_delete_technician/{id}',[DashboardController::class,'delete_technician'])->name('delete_technician');
+Route::get('/click_edit_technician/{id}',[DashboardController::class,'edit_technician'])->name('edit_technician');
+Route::post('edit_technician',[DashboardController::class,'update_technician']);
 
+Route::get('admin/view_assets',[DashboardController::class,'view_assets'])->name('view_assets');
+Route::get('admin/add_asset',[DashboardController::class,'add_asset'])->name('add_assets dashboard');
+Route::post('admin/add_asset',[DashboardController::class,'add_assets'])->name('add_asset');
+
+
+Route::get('/click_delete_Product/{id}',[DashboardController::class,'delete_product'])->name('delete_product');
+Route::get('/click_edit_assets/{id}',[DashboardController::class,'edit_assets'])->name('edit_assets');
+Route::post('edit_assets',[DashboardController::class,'update_assets']);
+
+Route::get('/click_sell_assets/{id}',[DashboardController::class,'add_customer'])->name('add_customer');
+Route::post('/click_sell_assets/{id}',[DashboardController::class,'add_customers'])->name('add_customer');
+
+
+Route::get('admin/assets_pdf', [PdfassetsController::class, 'generatePDF']);
+
+Route::get('/click_customer_bill',[DashboardController::class,'customer_bill'])->name('customer_bill');
+Route::post('/click_customer_bill',[DashboardController::class,'customer_bills'])->name('customer_bill');
+Route::get('admin/print_invoice/{id}', [PdfassetsController::class, 'print_invoicePDF']);
+
+Route::get('admin/view_request',[DashboardController::class,'view_request'])->name('view_request');
+Route::get('/click_view_request/{id}',[DashboardController::class,'details_addtechnicians'])->name('details_addtechnicians');
+Route::get('view_request_addtechnician',[DashboardController::class,'update_details']);
+Route::post('/insert',[DashboardController::class,'insert_assignedwork']);
+
+Route::get('requester/checkstatus',[RequesterController::class,'checkstatus'])->name('checkstatus dashboard');
+Route::post('requester/checkstatus',[RequesterController::class,'reqcheckstatus']);
+Route::get('requester/checkstatus',[RequesterController::class,'view_status'])->name('requester/checkstatus');
+
+Route::get('admin/add_leave',[DashboardController::class,'add_leave'])->name('add_leave dashboard');
+Route::post('admin/add_leave',[DashboardController::class,'reqaddleave']);
+Route::get('admin/add_leave',[DashboardController::class,'view_techid'])->name('admin/add_leave');
+
+Route::get('admin/leave', [DashboardController::class,'Request_id'])->name('admin/leave');
+Route::post('admin/leave', [DashboardController::class,'Request_id'])->name('admin/leave');
+
+Route::post('/insertLeave',[DashboardController::class,'insert_leave']);
+
+Route::get('requester/status', [RequesterController::class,'Request_status'])->name('requester/status');
+Route::post('requester/status', [RequesterController::class,'Request_status'])->name('requester/status');
+
+Route::get('admin/work_order',[DashboardController::class,'work_order'])->name('work_order');
+
+Route::get('requester/request',[RequesterController::class,'request'])->name('requestdashboard');
+Route::post('requester/request',[RequesterController::class,'addRequest'])->name('requeststore');
+
+Route::get('requester/request_info',[RequesterController::class,'request_info'])->name('request_info');
+Route::post('requester/request_info',[RequesterController::class,'request_info'])->name('request_info');
+
+
+Route::get('admin/details_addtechnicians',array('as'=>'myform','uses'=>'App\Http\Controllers\DashboardController@myform'));
+Route::get('/click_delete_request/{id}',[DashboardController::class,'delete_request'])->name('delete_request');
+
+Route::get('admin/admin_dashboard',[DashboardController::class,'fetch_data_admin'])->name('fetch_data_admin');
+Route::get('admin/requester_dashboard',[DashboardController::class,'fetch_data_requester'])->name('fetch_data_requester');
+
+Route::get('requester/old_request',[RequesterController::class,'old_request'])->name('old_request');
+
+Route::get('requester/feedback',[RequesterController::class,'feedback'])->name('feedback dashboard');
+Route::post('requester/feedback',[RequesterController::class,'addFeedback']);
+Route::get('admin/view_feedbacks',[DashboardController::class,'view_feedbacks'])->name('view_feedbacks');
 
 Route::get('/auth/logout',[DashboardController::class,'logout'])->name('auth.logout');
+
 
 require __DIR__.'/auth.php';
