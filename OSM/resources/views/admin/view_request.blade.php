@@ -12,7 +12,7 @@
         <div class="alert alert-dark mt-4"  role="alert">{{session('success')}}</div>
         @endif
             <?php  $cnt=1;?>
-            @foreach($request_tbs as $request_tb)
+            @foreach($requestttt_tbs as $request_tb)
             <div class="fluid-container">
           <div class="row ticket-card mt-3 pb-2 border-bottom pb-3 mb-3">
             
