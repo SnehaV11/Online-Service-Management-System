@@ -14,14 +14,7 @@
                 <th> # </th>
                 <th> Request ID </th>
                 <th> Request information </th>
-                <th> Request Descrtiption </th>
                 <th> Requester Name </th>
-                <th>  Address </th>
-                <th>  City </th>
-                <th>  State </th>
-                <th> Zip </th>
-                <th> Email </th>
-                <th> Mobile </th>
                 <th> Technician </th>
                 <th> Assigned date </th>
               </tr>
@@ -34,14 +27,7 @@
                 <td> <?php echo $cnt;?></td>
                 <td>{{$assignwork_tb['request_id']}} </td>
                 <td>{{$assignwork_tb['request_info']}}</td>
-                <td>{{$assignwork_tb['request_desc']}} </td>
                 <td>{{$assignwork_tb['requester_name']}}</td>
-                <td>{{$assignwork_tb['requester_add1']}} </td>
-                <td>{{$assignwork_tb['requester_city']}}</td>
-                <td>{{$assignwork_tb['requester_state']}} </td>
-                <td>{{$assignwork_tb['requester_zip']}} </td>
-                <td>{{$assignwork_tb['requester_email']}} </td>
-                <td>{{$assignwork_tb['requester_mobile']}}</td>
                 <td>{{$assignwork_tb['assign_tech']}} </td>
                 <td>{{$assignwork_tb['assign_date']}}</td>
                 <td>

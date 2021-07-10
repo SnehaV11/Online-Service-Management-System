@@ -24,7 +24,7 @@
     <div class="form-row">
     <div class="form-group col-md-6">
     <label for="pName">Product Name</label>
-      <input type="text" class="form-control" id="cpname"  name="cpname" value="{{$data['pname']}}">
+      <input type="text" class="form-control" id="cpname"  name="cpname" value="{{$data['pname']}}" readonly>
     </div>
     <div class="form-group col-md-6">
         <label for="inputDate">Purchase Date</label>
@@ -38,19 +38,19 @@
     </div>
     <div class="form-group col-md-6">
       <label for="empCity">Quantity</label>
-      <input type="text" class="form-control" id="cpquantity"  name="cpquantity" >
+      <input  type='number' min='1' max='10' onchange="subTotal()" class="form-control text-center cpquantity" id="cpquantity"  name="cpquantity" >
     </div>
     </div>
 
     <div class="form-row">
-      
     <div class="form-group col-md-6">
       <label for="empCity">Price Each</label>
-      <input type="text" class="form-control" id="cpeach"  name="cpeach" value="{{$data['psellingcost']}}">
+      <td><input type='hidden' class='cpeach' value="{{$data['psellingcost']}}"></td>
+      <input type="text" class="form-control cpeach" id="cpeach" readonly name="cpeach" value="{{$data['psellingcost']}}">
     </div>
     <div class="form-group col-md-6">
       <label for="empCity">Total Price</label>
-      <input type="text" class="form-control" id="cptotal"  name="cptotal" >
+      <input  class="form-control cptotal"  id="cptotal"  name="cptotal" >
     </div>
     </div>
 
@@ -60,5 +60,20 @@
     </div>
   </div>
 </div>
+<script>
+var cpeach=document.getElementsByClassName('cpeach');
+var cpquantity=document.getElementsByClassName('cpquantity');
+var cptotal=document.getElementsByClassName('cptotal');
+function subTotal()
+{
+  for(i=0;cpeach.length;i++) 
+  { 
+    cptotal[i].innerText=cpeach[i].value)*(cpquantity[i].value);
+
+  }
+}
+
+subTotal();
+</script>
 
 @endsection
