@@ -149,8 +149,8 @@ Route::get('admin/view_technicians',[DashboardController::class,'view_technician
 Route::get('admin/view_requester',[DashboardController::class,'view_requester'])->name('view_requester');
 Route::get('/click_delete_requester/{id}',[DashboardController::class,'delete_requester'])->name('delete_requester');
 
-Route::get('admin/add_technician',[DashboardController::class,'add_technician'])->name('add_technicians dashboard');
-Route::post('admin/add_technician',[DashboardController::class,'add_technicians'])->name('add_technician');
+Route::get('admin/add_technician',[DashboardController::class,'ad_technician'])->name('add_technicians dashboard');
+Route::post('admin/add_technician',[DashboardController::class,'ad_technicians'])->name('ad_technician');
 Route::get('/click_delete_technician/{id}',[DashboardController::class,'delete_technician'])->name('delete_technician');
 Route::get('/click_edit_technician/{id}',[DashboardController::class,'edit_technician'])->name('edit_technician');
 Route::post('edit_technician',[DashboardController::class,'update_technician']);
@@ -166,7 +166,7 @@ Route::post('edit_assets',[DashboardController::class,'update_assets']);
 
 Route::get('/click_sell_assets/{id}',[DashboardController::class,'add_customer'])->name('add_customer');
 Route::post('/click_sell_assets/{id}',[DashboardController::class,'add_customers'])->name('add_customer');
-
+Route::get('admin/details_addtechnician',array('as'=>'myform','uses'=>'App\Http\Controllers\DashboardController@myform'));
 
 Route::get('admin/assets_pdf', [PdfassetsController::class, 'generatePDF']);
 
@@ -176,6 +176,7 @@ Route::get('admin/print_invoice/{id}', [PdfassetsController::class, 'print_invoi
 
 Route::get('admin/view_request',[DashboardController::class,'view_request'])->name('view_request');
 Route::get('/click_view_request/{id}',[DashboardController::class,'details_addtechnicians'])->name('details_addtechnicians');
+Route::get('/click_view_resolve/{id}',[DashboardController::class,'adddetailstechnicians'])->name('adddetails_addtechnicians');
 Route::get('view_request_addtechnician',[DashboardController::class,'update_details']);
 Route::post('/insert',[DashboardController::class,'insert_assignedwork']);
 
@@ -202,6 +203,11 @@ Route::get('admin/admin_dashboard',[DashboardController::class,'fetch_data_admin
 Route::get('admin/requester_dashboard',[DashboardController::class,'fetch_data_requester'])->name('fetch_data_requester');
 
 Route::get('requester/old_request',[RequesterController::class,'old_request'])->name('old_request');
+Route::get('requester/checkstatus',[RequesterController::class,'status_request'])->name('status_request');
+Route::get('requester/feedback',[RequesterController::class,'feedback'])->name('feedback dashboard');
+Route::post('requester/feedback',[RequesterController::class,'addFeedback']);
+Route::get('admin/download/{id}',[DashboardController::class,'downloadfile'])->name('down');
+Route::post('admin/update_tracking/{id}',[DashboardController::class,'trackingstatus'])->name('track');
 
 Route::get('/auth/logout',[DashboardController::class,'logout'])->name('auth.logout');
 

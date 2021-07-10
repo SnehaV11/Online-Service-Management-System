@@ -8,10 +8,12 @@
         <center><h1 class="card-title"> Service Request</h1></center>
         
         <div class="col-sm-9 co  l-md-10 mt-5">
-  <form class="mx-5" action="{{route('requeststore')}}" method="POST">
+  <form class="mx-5" action="{{route('requeststore')}}" method="POST" enctype="multipart/form-data">
  
   @csrf
- 
+  @if(session('success'))
+        <div class="alert alert-dark mt-4" role="alert">{{session('success')}}</div>
+        @endif
   <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
     <div class="form-group">
       <label for="inputRequestInfo">Request information</label>
@@ -60,6 +62,13 @@
         <input type="date" class="form-control" id="inputDate" name="request_date">
       </div>
     </div>
+    <div class="form-group ">
+      <div class="custom-file">
+        <label for="img">choose image/video file</label><br>
+        <input type="file" class="custom-file-inputl" id="img" name="img">
+      </div>
+    </div>
+
     <button type="submit" class="btn btn-secondary">submit</button>
 
     <button type="Reset" class="btn btn-secondary">Reset</button>
